@@ -1,0 +1,12 @@
+{
+  "name": "pantry",
+  "displayName": "pantry",
+  "expo": {
+    "name": "pantry",
+    "slug": "pantry",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
