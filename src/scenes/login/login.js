@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet} from 'react-native';
-import GenericButton from '../../components/atoms/Button/Button.js';
 import HyperLinkText from '../../components/atoms/HyperLinkText/HyperLinkText.js';
+import LoginForm from '../../components/molecules/LoginForm/LoginForm.js';
 
 const Login = ({ navigation }) => {
     return (
         <View
             style={styles.container}
         >       
-            <GenericButton
-                message={"Login"}
-            />
+            <LoginForm />
             <HyperLinkText
                 message={"Don't have an account?"}
                 screen={"Register"}
@@ -34,9 +32,9 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#FBF6F2",
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
 

@@ -2,15 +2,14 @@ import React, {useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 
 const InputField = (props) => {
-    const [value, setValue] = useState("");
-
     return (
         <TextInput
             style={styles.inputField}
             placeholder={props.placeholder}
-            placeholderTextColor="#AF95E8"
-            onChangeText={text => setValue(text)}
-            value={value}
+            placeholderTextColor="#300076"
+            onChangeText={text => props.setValue(text)}
+            value={props.value}
+            secureTextEntry={props.secure ? props.secure : false}
         />
     )
 };
@@ -18,10 +17,10 @@ const InputField = (props) => {
 const styles = StyleSheet.create({
     inputField: {
         backgroundColor: "#E2E6FF",
-        color: "#AF95E8",
-        width: 250,
-        height: 41,
-        paddingLeft: 10
+        color: "#300076",
+        width: 300,
+        height: 40,
+        paddingLeft: 10,
     }
 });
 
