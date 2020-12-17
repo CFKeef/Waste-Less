@@ -1,14 +1,18 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
 const InputFieldLabel = (props) => {
-    return (
-        <Text styles={styles}>{props.text}</Text>
+    return ( 
+            <Text style={styles.label}>{props.text}</Text>
     )
 };
 
 const styles = StyleSheet.create({
-
+    label: {
+        alignSelf: "flex-start",
+        color: "#300076",
+        fontWeight: "700",
+    }
 });
 
 export default InputFieldLabel;
