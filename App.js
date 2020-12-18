@@ -8,6 +8,7 @@ import Dashboard from './src/scenes/dashboard/dashboard.js';
 import Register from './src/scenes/register/register.js';
 import Recover from './src/scenes/recover/recover.js';
 import LinkSent from './src/scenes/LinkSent/LinkSent.js';
+import ChangePassword from './src/scenes/ChangePassword/ChangePassword.js';
 
 
 const Stack = createStackNavigator();
@@ -19,12 +20,13 @@ export default function App() {
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName="Register"
+        initialRouteName="ChangePassword"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Recover" component={Recover} />
         <Stack.Screen name="LinkSent" component={LinkSent} />
+        <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
