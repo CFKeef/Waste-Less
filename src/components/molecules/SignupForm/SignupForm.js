@@ -28,7 +28,7 @@ const SignupForm = (props) => {
     }
 
     const handleSignup = () => {
-        
+        props.navigation.navigate("LinkSent");
     }
 
     const handleWrongInputs = () => {

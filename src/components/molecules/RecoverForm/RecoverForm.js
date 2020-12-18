@@ -21,7 +21,7 @@ const RecoverForm = (props) => {
     }
 
     const handleRecovery = () => {
-        console.log(email)
+        props.navigation.navigate("LinkSent");
     }
 
     const handleWrongInputs = () => {

@@ -15,7 +15,7 @@ const Recover = ({ navigation }) => {
                         <Text style={styles.title}>Recover</Text>
                         <Text style={styles.subTitle}>Enter your email below!</Text>
                     </View>
-                    <RecoverForm />
+                    <RecoverForm navigation={navigation} />
                     <View style={styles.hyperLinkTextContainer}>
                         <HyperLinkText
                             message={"Already have an account? Sign in"}

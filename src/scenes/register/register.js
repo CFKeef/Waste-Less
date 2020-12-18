@@ -15,7 +15,7 @@ const Register = ({ navigation }) => {
                         <Text style={styles.title}>Signup</Text>
                         <Text style={styles.subTitle}>Start managing your pantry the right way!</Text>
                     </View>
-                    <SignupForm />
+                    <SignupForm navigation={navigation} />
                     <View style={styles.hyperLinkTextContainer}>
                         <HyperLinkText
                             message={"Already have an account? Sign in"}
