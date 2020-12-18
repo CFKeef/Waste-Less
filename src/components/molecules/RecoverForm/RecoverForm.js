@@ -9,7 +9,7 @@ const RecoverForm = (props) => {
     const [error, setError] = useState(false);
 
     const handleRecovery = () => {
-        console.log(email + " " + password)
+        console.log(email)
     }
 
     const handleWrongInputs = () => {
