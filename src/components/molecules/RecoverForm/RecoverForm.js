@@ -8,6 +8,18 @@ const RecoverForm = (props) => {
     const [email, setEmail] = useState("");
     const [error, setError] = useState(false);
 
+    const validation = () => {
+        switch(true) {
+            case email.length === 0:
+                setError(true);
+                break;
+            default:
+                setError(false);
+                handleRecovery();
+                break;
+        }
+    }
+
     const handleRecovery = () => {
         console.log(email)
     }
@@ -37,7 +49,7 @@ const RecoverForm = (props) => {
             <View style={styles.space}>
                 <GenericButton
                     message={"Recover"}
-                    action={handleRecovery}
+                    action={validation}
                     backgroundColor={"#592CBA"}
                     textColor={"#FFD5CE"}
                     color={"#592CBA"}

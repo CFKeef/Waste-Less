@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         fontWeight: "700"
     },
     content: {
-        marginTop: 100
+        marginTop: 80
     },
     extraSpace: {
         marginTop: 20

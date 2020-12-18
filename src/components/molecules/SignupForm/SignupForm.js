@@ -12,8 +12,23 @@ const SignupForm = (props) => {
     const [newsLetterCheck, setNewsLetterCheck] = useState(false);
     const [error, setError] = useState(false);
 
+    const validation = () => {
+        switch(true) {
+            case !termsCheck:
+            case email.length === 0:
+            case password.length === 0:
+            case confirmedPassword.length === 0:
+                setError(true);
+                break;
+            default:
+                setError(false);
+                handleSignup();
+                break;
+        }
+    }
+
     const handleSignup = () => {
-        console.log(email + " " + password)
+        
     }
 
     const handleWrongInputs = () => {
@@ -81,7 +96,7 @@ const SignupForm = (props) => {
             <View style={styles.space}>
                 <GenericButton
                     message={"Signup"}
-                    action={handleSignup}
+                    action={validation}
                     backgroundColor={"#592CBA"}
                     textColor={"#FFD5CE"}
                     color={"#592CBA"}

@@ -9,6 +9,19 @@ const LoginForm = (props) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
 
+    const validation = () => {
+        switch(true) {
+            case email.length === 0:
+            case password.length === 0:
+                setError(true);
+                break;
+            default:
+                setError(false);
+                handleLogin();
+                break;
+        }
+    }
+
     const handleLogin = () => {
         console.log(email + " " + password);
         props.navigation.navigate("Dashboard");
@@ -50,7 +63,7 @@ const LoginForm = (props) => {
             <View style={styles.space}>
                 <GenericButton
                     message={"Login"}
-                    action={handleLogin}
+                    action={validation}
                     backgroundColor={"#592CBA"}
                     textColor={"#FFD5CE"}
                     color={"#592CBA"}
