@@ -4,8 +4,8 @@ import { Text, StyleSheet, View } from 'react-native';
 const HyperLinkText = (props) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}> 
-                {props.message} <Text style={styles.highlight} onPress={() => props.navigation.navigate(props.screen)}>{props.linkMessage}</Text>
+            <Text style={styles.text} onPress={() => props.navigation.navigate(props.screen)}> 
+                {props.message} <Text style={styles.highlight}>{props.linkMessage}</Text>
             </Text>
         </View>
     )

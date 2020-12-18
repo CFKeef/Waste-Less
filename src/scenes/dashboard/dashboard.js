@@ -1,13 +1,26 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native';
 
 const Dashboard = () => {
     return (
-        <View>
-            <Text>Hi from dashboard</Text>
-        </View>
+        <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
+            <View style={styles.container}>
+                <View>
+                    <View>
+                        <Text>Pantry</Text>
+                    </View>
+                    
+                </View>
+            </View>
+        </SafeAreaView>
     )
 };
+const styles = StyleSheet.create({
+    container: {
+        alignItems: "center",
+        justifyContent: "flex-start",
+    }
+});
 
 export default Dashboard;
 

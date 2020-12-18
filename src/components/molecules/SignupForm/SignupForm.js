@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Switch} from 'react-native';
 import InputField from '../../atoms/InputField/InputField.js';
 import InputFieldLabel from '../../atoms/InputFieldLabel/InputFieldLabel.js';
 import GenericButton from "../../atoms/Button/Button.js"
@@ -8,6 +8,8 @@ const SignupForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
+    const [termsCheck, setTermsCheck] = useState(false);
+    const [newsLetterCheck, setNewsLetterCheck] = useState(false);
     const [error, setError] = useState(false);
 
     const handleSignup = () => {
@@ -58,6 +60,24 @@ const SignupForm = (props) => {
                     secure={true}
                 />
             </View>
+            <View style={styles.checksContainer}>
+                <View style={styles.checks}>
+                    <View style={styles.checkbox}>
+                        <Switch trackColor={{true: "#592CBA", false: "grey"}} value={termsCheck} onValueChange={() => setTermsCheck(!termsCheck)} />
+                    </View>
+                    <View style={styles.text}>
+                        <Text>{`I have read and agree to the Terms of Services & Privacy Policy`}</Text>
+                    </View>
+                </View>
+                <View style={styles.checks}>
+                    <View style={styles.checkbox}>
+                        <Switch trackColor={{true: "#592CBA", false: "grey"}} value={newsLetterCheck} onValueChange={() => setNewsLetterCheck(!newsLetterCheck)} />
+                    </View>
+                    <View style={styles.text}>
+                        <Text>{`Sign up for our newsletter`}</Text>
+                    </View>
+                </View>
+            </View>
             <View style={styles.space}>
                 <GenericButton
                     message={"Signup"}
@@ -98,7 +118,22 @@ const styles = StyleSheet.create({
     },
     labelSpace: {
         marginBottom: 5
+    },
+    checksContainer: {
+    },
+    checks: {
+        flexDirection: "row",
+        width: 300,
+        marginTop: 20
+    },
+    checkbox: {
+        
+    },
+    text: {
+        marginLeft: 10,
+        width: "75%"
     }
+
 });
 
 export default SignupForm;

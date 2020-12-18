@@ -10,7 +10,8 @@ const LoginForm = (props) => {
     const [error, setError] = useState(false);
 
     const handleLogin = () => {
-        console.log(email + " " + password)
+        console.log(email + " " + password);
+        props.navigation.navigate("Dashboard");
     }
 
     const handleWrongLogin = () => {

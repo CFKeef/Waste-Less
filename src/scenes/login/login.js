@@ -15,7 +15,9 @@ const Login = ({ navigation }) => {
                         <Text style={styles.title}>Login</Text>
                         <Text style={styles.subTitle}>Login to manage your pantry</Text>
                     </View>
-                    <LoginForm />
+                    <LoginForm 
+                        navigation={navigation}
+                    />
                     <View style={styles.hyperLinkTextContainer}>
                         <HyperLinkText
                             message={"Don't have an account? Create it"}
