@@ -14,9 +14,7 @@ const Dashboard = () => {
 
     // Returns a date in the form Month DD, YYYY
     const handleDateString = () => {
-        return new Date().toLocaleDateString({},
-            {timeZone:"UTC",month:"long", day:"2-digit"}
-            )
+        return new Date().toLocaleDateString({},{timeZone:"UTC",month:"long", day:"2-digit"})
     }
 
     return (

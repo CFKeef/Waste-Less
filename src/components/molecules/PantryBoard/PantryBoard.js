@@ -3,8 +3,8 @@ import { Text, StyleSheet, View, FlatList} from 'react-native';
 import ListTab from "../../atoms/ListTab/ListTab.js";
 
 const PantryBoard = (props) => {
-    const handleAction = (title) => {
-        console.log(title)
+    const handleAction = (tab) => {
+        props.setSelectedTab(tab.id);
     }
 
     return (
