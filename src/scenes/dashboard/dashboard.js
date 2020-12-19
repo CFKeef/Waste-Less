@@ -3,6 +3,8 @@ import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-nat
 
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
+import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
+
 let testObj = [
     {id: String(new Date().getTime() + 1), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("11/23/2020").toLocaleDateString("en-us"), expired: false},
     {id: String(new Date().getTime() + 2), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/15/2020").toLocaleDateString("en-us"), expired: false},
@@ -14,7 +16,7 @@ let testObj = [
     {id: String(new Date().getTime() + 8), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true},
 ]
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
     const [masterData, setMasterData] = useState(testObj);
     const [tabs, setTabs] = useState([
         {id: "tab0", title: "All"},
@@ -69,6 +71,10 @@ const Dashboard = () => {
                 <ProductList
                     displayData={masterData}
                     setData={setMasterData}
+                />
+                <UserInterface
+                    navigation={navigation}
+                    source={require('../../../assets/images/plus.png')}
                 />
             </View>
         </SafeAreaView>
