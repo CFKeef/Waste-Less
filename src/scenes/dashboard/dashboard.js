@@ -12,6 +12,12 @@ const Dashboard = () => {
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
 
+    // Wrapped the hook in function to let us update data set to only show items located
+    // In that selected tab
+    const handleTabSwitch = (id) => {
+        setSelectedTab(id);
+    }
+
     // Returns a date in the form Month DD, YYYY
     const handleDateString = () => {
         return new Date().toLocaleDateString({},{timeZone:"UTC",month:"long", day:"2-digit"})
@@ -45,7 +51,7 @@ const Dashboard = () => {
                 <PantryBoard 
                     tabs={tabs}
                     selected={selectedTab}
-                    setSelectedTab={setSelectedTab}
+                    setSelectedTab={handleTabSwitch}
                     data={masterData}
                 />
             </View>
