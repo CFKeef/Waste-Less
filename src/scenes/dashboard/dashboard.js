@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-native';
+import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard';
 
 const Dashboard = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [masterData, setMasterData] = useState([]);
+    const [tabs, setTabs] = useState([
+        {id: "tab0", title: "All"},
+        {id: "tab1", title: "All2"},
+    ]);
+    const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
+
+    // Returns a date in the form Month DD, YYYY
+    const handleDateString = () => {
+        return new Date().toLocaleDateString({},
+            {timeZone:"UTC",month:"long", day:"2-digit"}
+            )
+    }
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
@@ -14,6 +27,7 @@ const Dashboard = () => {
                     {/*  Title Line  */}
                     <View style={styles.textContainer}>
                         <Text style={styles.headerText}>Pantry</Text>
+                        <Text style={styles.dateText}>{handleDateString()}</Text>
                     </View>
                     <View style={styles.searchBarContainer}>
                         <TextInput
@@ -30,9 +44,12 @@ const Dashboard = () => {
                     </View>
                 </View>
                 {/*  List portion of dashboard   */}
-                <View>
-                
-                </View>
+                <PantryBoard 
+                    tabs={tabs}
+                    selected={selectedTab}
+                    setSelectedTab={setSelectedTab}
+                    data={masterData}
+                />
             </View>
         </SafeAreaView>
     )
@@ -43,11 +60,18 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
     },
     textContainer: {
-        textAlign: "left",
-        marginBottom: 10
+        marginBottom: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
     },
     headerText: {
         fontSize: 24,
+        color: "#300076",
+        fontWeight: "700",
+    },
+    dateText: {
+        fontSize: 22,
         color: "#300076",
         fontWeight: "700",
     },
