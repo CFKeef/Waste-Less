@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Text, StyleSheet, View, FlatList} from 'react-native';
+
 import ListTab from "../../atoms/ListTab/ListTab.js";
 
 const PantryBoard = (props) => {
@@ -28,7 +29,6 @@ const PantryBoard = (props) => {
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        marginBottom: 10,
         alignSelf: "stretch",
     },
     tabContainer: {
