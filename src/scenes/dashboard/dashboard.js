@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
@@ -31,11 +32,6 @@ const Dashboard = ({navigation}) => {
         setSelectedTab(id);
     }
 
-    // Returns a date in the form Month DD, YYYY
-    const handleDateString = () => {
-        return new Date().toLocaleDateString({},{timeZone:"UTC",month:"long", day:"2-digit"})
-    }
-
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
             <View style={styles.container}>
@@ -44,7 +40,12 @@ const Dashboard = ({navigation}) => {
                     {/*  Title Line  */}
                     <View style={styles.textContainer}>
                         <Text style={styles.headerText}>Pantry</Text>
-                        <Text style={styles.dateText}>{handleDateString()}</Text>
+                        <TouchableOpacity>
+                            <Image 
+                                style={styles.burgerImage}
+                                source={require('../../../assets/images/menu.png')}
+                            />
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.searchBarContainer}>
                         <TextInput
@@ -120,6 +121,10 @@ const styles = StyleSheet.create({
     searchBarContainer: {
         borderColor: "#e5e5e5",
         borderWidth: 1
+    },
+    burgerImage: {
+        height: 20,
+        width: 20
     }
 });
 
