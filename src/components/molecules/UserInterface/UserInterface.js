@@ -6,7 +6,13 @@ const UserInterface = (props) => {
         <View style={styles.container}>
            <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.touchable} onPress={() => console.log("TEST!")}>
-                    <Text style={styles.touchableText}>Add</Text>
+                    <Text style={styles.touchableText}>Add Tab</Text>
+                </TouchableOpacity>
+           </View>
+
+           <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.touchable} onPress={() => console.log("TEST!")}>
+                    <Text style={styles.touchableText}>Add Product</Text>
                 </TouchableOpacity>
            </View>
         </View>
@@ -17,7 +23,7 @@ const styles=StyleSheet.create({
     container: {
         flexDirection: "row",
         alignSelf: "stretch",
-        justifyContent: "center",
+        justifyContent: "space-between",
         marginTop: 10,
         marginLeft: 20,
         marginRight: 20
@@ -26,13 +32,13 @@ const styles=StyleSheet.create({
         backgroundColor: "#cae1e7",
         borderRadius: 5,
         borderColor: "#e5e5e5",
-        borderWidth: 1
+        borderWidth: 1,
     },
     touchable: {
         paddingTop: 10,
         paddingBottom: 10,
-        paddingLeft: 40,
-        paddingRight: 40,
+        width: 120,
+        alignItems: "center"
     },
     touchableText: {
         color: "#300070",
