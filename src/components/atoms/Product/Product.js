@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: "#FFFFFF",
         width: "100%",
+        borderColor: "#e5e5e5",
+        borderWidth: 1
     },
     cardContainer: {
         flexDirection: "row"

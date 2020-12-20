@@ -6,12 +6,7 @@ const UserInterface = (props) => {
         <View style={styles.container}>
            <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.touchable}>
-                    <Text style={styles.touchableText}>Menu</Text>
-                </TouchableOpacity>
-           </View>
-           <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.touchable}>
-                    <Text style={styles.touchableText}>Alerts</Text>
+                    <Text style={styles.touchableText}>Add</Text>
                 </TouchableOpacity>
            </View>
         </View>
@@ -22,19 +17,25 @@ const styles=StyleSheet.create({
     container: {
         flexDirection: "row",
         alignSelf: "stretch",
-        justifyContent: "space-between",
+        justifyContent: "center",
         marginTop: 10,
         marginLeft: 20,
         marginRight: 20
     },
     btnContainer: {
-        backgroundColor: "#300070"
+        backgroundColor: "#cae1e7",
+        borderRadius: 5,
+        borderColor: "#e5e5e5",
+        borderWidth: 1
     },
     touchable: {
-        padding: 15,
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 40,
+        paddingRight: 40,
     },
     touchableText: {
-        color: "#FFD5CE",
+        color: "#300070",
         fontWeight: "700",
         fontSize: 16
     }

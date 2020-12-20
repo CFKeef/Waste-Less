@@ -116,6 +116,10 @@ const styles = StyleSheet.create({
         width: 300,
         height: 40,
         paddingLeft: 40,
+    },
+    searchBarContainer: {
+        borderColor: "#e5e5e5",
+        borderWidth: 1
     }
 });
 
