@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 
 const UserInterface = (props) => {
     return (
         <View style={styles.container}>
            <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.touchable}>
+                <TouchableOpacity style={styles.touchable} onPress={() => console.log("TEST!")}>
                     <Text style={styles.touchableText}>Add</Text>
                 </TouchableOpacity>
            </View>
