@@ -22,6 +22,11 @@ const ProductList = (props) => {
                     {length: 80, offset: 80 * index, index}
                 )}
                 initialScrollIndex={0}
+                ListEmptyComponent={
+                    <View style={styles.posContainer}>
+                        <Text style={styles.emptyList}>Add something to your pantry!</Text>
+                    </View>
+                }
              />
         </View>
     )
@@ -36,6 +41,18 @@ const styles = StyleSheet.create({
         marginRight: 20,
         height: 550
     },
+    posContainer: {
+        alignSelf: "stretch",
+        alignItems: "center", 
+        justifyContent: "center",
+    },  
+    emptyList: {
+        marginTop: 250,
+        fontSize: 20,
+        marginLeft: 20,
+        marginRight: 20,
+        color: "#AAAAAA"
+    }
 });
 
 export default ProductList;

@@ -7,14 +7,14 @@ import ProductList from '../../components/molecules/ProductList/ProductList.js';
 import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
 
 let testObj = [
-    {id: String(new Date().getTime() + 1), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("11/23/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 2), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/15/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 3), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 4), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 5), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 6), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 7), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    {id: String(new Date().getTime() + 8), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 1), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("11/23/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 2), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/15/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 3), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 4), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 5), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 6), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 7), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
+    // {id: String(new Date().getTime() + 8), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
 ]
 
 const Dashboard = ({navigation}) => {
@@ -50,7 +50,7 @@ const Dashboard = ({navigation}) => {
                     <View style={styles.searchBarContainer}>
                         <TextInput
                             style={styles.inputField}
-                            placeholder={"Seach your pantry"}
+                            placeholder={"Search your pantry"}
                             placeholderTextColor="#300076"
                             onChangeText={text => setTarget(text)}
                             value={target}
