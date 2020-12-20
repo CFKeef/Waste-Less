@@ -21,7 +21,6 @@ const Dashboard = ({navigation}) => {
     const [masterData, setMasterData] = useState(testObj);
     const [tabs, setTabs] = useState([
         {id: "tab0", title: "All"},
-        {id: "tab1", title: "Fridge"},
     ]);
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
