@@ -11,15 +11,42 @@ import CategoryInput from "../../atoms/CategoryInput";
 const getProducts = state => state.products.products;
 
 
-const AddProductForm = () => {
+const AddProductForm = (props) => {
     const storeProducts = useSelector(getProducts);
     const dispatch = useDispatch();
 
     const [id, setID] = useState("");
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
+    const [location, setLocation] = useState("");
+    const [expirationDate, setExpirationDate] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [unit, setUnit] = useState("");
 
-    const addProductSubmit = (product) => dispatch(addProduct(product));
+    const addProductSubmit = () => {
+        const resetState = () => {
+            setID("");
+            setTitle("");
+            setCategory("");
+            setLocation("");
+            setExpirationDate("");
+            setQuantity("");
+            setUnit("");
+            props.setAddProductShown(false);
+        }
+        const newProduct = {
+            id: "prod" + title + new Date().getTime(),
+            title: title,
+            category: category,
+            location: location,
+            expirationDate: expirationDate,
+            quantity: quantity,
+            unit: unit
+        };
+        console.log(newProduct);
+        resetState();
+        //dispatch(addProduct(product)
+    };
     return (
         <View style={styles.formContainer}>
             <View style={styles.posContainer}>

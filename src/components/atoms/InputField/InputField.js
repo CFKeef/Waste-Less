@@ -17,7 +17,7 @@ const InputField = (props) => {
 const styles = StyleSheet.create({
     inputField: {
         backgroundColor: "#E2E6FF",
-        color: "#30007",
+        color: "#300070",
         width: 300,
         height: 40,
         paddingLeft: 10,

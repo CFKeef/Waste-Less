@@ -27,6 +27,7 @@ const CategoryInput = (props) => {
                 placeholder="Select a category"
                 placeholderStyle={styles.placeholderStyle}
                 onChangeItem={item => props.setCategory(item)}
+                showArrow={false}
             />
         </View>
     )

@@ -60,7 +60,7 @@ const Dashboard = ({navigation}) => {
                     selected={selectedTab}
                     setSelectedTab={handleTabSwitch}
                 />
-                {addProductShown ? <AddProductForm /> : null}
+                {addProductShown ? <AddProductForm setAddProductShown={setAddProductShown} /> : null}
                 <ProductList />
                 <UserInterface
                     navigation={navigation}
