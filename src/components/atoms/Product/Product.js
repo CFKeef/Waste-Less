@@ -1,40 +1,47 @@
 import React from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 
+import Meat from './meat.png'
+
 const Product = (props) => {
     const handleExpirationText = () => {
-        let today = new Date();
+        let timeDiff = new Date(props.product.expirationDate).getTime() - new Date().getTime();
+        let daysSince = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-        // If expires within 3 days do yellow text
-
-        // If expired red text
-
-        // Else green text
-
-        return "Expired"
+        if(daysSince <= 3 && daysSince >= 1) return "Expires in " + daysSince + " day";
+        else if(daysSince > 3) return "Good until " + props.product.expirationDate;
+        else if(daysSince === 0) return "Expires Today";
+        else {
+            return "Expired " + Math.abs(daysSince) + " days ago";
+        }
     };
 
     const handleItemImage = (category) => {
         switch (category) {
             case "Meat":
-                return itemArr[0].imageLink
+                return Meat
         }
     }
 
     const handleExpirationStyling = () => {
+        let timeDiff = new Date(props.product.expirationDate).getTime() - new Date().getTime();
+        let daysSince = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-        return styles.expiredText
+        if(daysSince <= 3 && daysSince >= 1) return styles.warningText;
+        else if(daysSince > 3) return styles.goodText;
+        else {
+            return styles.expiredText;
+        }
     };
 
     return (
         <TouchableOpacity key={props.product.title + props.product.index} style={styles.container}>
             <View style={styles.posContainer}>
                 <View style={styles.cardContainer}>
-                {console.log(props)}
                     <View style={[styles.textContainer, styles.leftContainer]}>
                         <Image 
                             style={styles.categoryImg}
-                            source={require('./meat.png')}
+                            source={handleItemImage(props.product.category)}
                         />
                         <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.leftText]}>{props.product.title}</Text>
                     </View>
@@ -106,8 +113,14 @@ const styles = StyleSheet.create({
     otherText: {
         color: "#300070"
     },
+    goodText: {
+        color: "#75F067"
+    },
+    warningText: {
+        color: "#6775f0"
+    },
     expiredText: {
-        color: "#E276A0"
+        color: "#F06775"
     }
 })
 
