@@ -6,6 +6,7 @@ import { addProduct } from "../../../actions/products.js";
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
 import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
+import AddProductForm from '../../components/molecules/AddProductForm/AddProductForm.js';
 
 // Pull from
 const getProducts = state => state.products.products;
@@ -14,6 +15,8 @@ const Dashboard = ({navigation}) => {
     // Call our data set
     const storeProducts = useSelector(getProducts);
     const dispatch = useDispatch();
+
+    const [addProductShown, setAddProductShown] = useState(false);     
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
     
@@ -25,7 +28,6 @@ const Dashboard = ({navigation}) => {
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
-        {console.log(storeProducts)}
             <View style={styles.container}>
                 {/*  Top part of dashboard   */}
                 <View style={styles.topContainer}>
@@ -58,10 +60,12 @@ const Dashboard = ({navigation}) => {
                     selected={selectedTab}
                     setSelectedTab={handleTabSwitch}
                 />
+                {addProductShown ? <AddProductForm /> : null}
                 <ProductList />
                 <UserInterface
                     navigation={navigation}
-                    source={require('../../../assets/images/plus.png')}
+                    addProductShown={addProductShown}
+                    setAddProductShown={setAddProductShown}
                 />
             </View>
         </SafeAreaView>
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 24,
-        color: "#300076",
+        color: "#300070",
         fontWeight: "700",
     },
     dateText: {

@@ -1,7 +1,3 @@
-const initialState = {
-    "tabs": [{id: "tab0", title: "All"}]
-};
-
 const tabs = (state = {
     "tabs": [{id: "tab0", title: "All"}]
 }, action) => {

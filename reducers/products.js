@@ -5,9 +5,7 @@ const products = (state = {
 
     switch(type) {
         case "PRODUCTS_ADD":
-            console.log(state)
             state.products = [...state.products, payload]
-            console.log(state)
             return {...state}
         case "PRODUCTS_EDIT":
             let newProducts = [];
@@ -20,7 +18,7 @@ const products = (state = {
 
             return {...state}
         case "PRODUCTS_DELETE":
-            state = state.filter(product => product.id !== payload.id);
+            state.products = state.filter(product => product.id !== payload.id);
             return {...state}
         default:
             return state;

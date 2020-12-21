@@ -6,7 +6,7 @@ const InputField = (props) => {
         <TextInput
             style={styles.inputField}
             placeholder={props.placeholder}
-            placeholderTextColor="#300076"
+            placeholderTextColor="#300070"
             onChangeText={text => props.setValue(text)}
             value={props.value}
             secureTextEntry={props.secure ? props.secure : false}
@@ -17,7 +17,7 @@ const InputField = (props) => {
 const styles = StyleSheet.create({
     inputField: {
         backgroundColor: "#E2E6FF",
-        color: "#300076",
+        color: "#30007",
         width: 300,
         height: 40,
         paddingLeft: 10,
