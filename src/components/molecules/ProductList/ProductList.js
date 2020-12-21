@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import {TouchableOpacity, View, Text, FlatList, StyleSheet} from 'react-native';
+import { useSelector, useDispatch } from "react-redux";
 
 import Product from '../../atoms/Product/Product.js';
+const getProducts = state => state.products.products;
 
 const ProductList = (props) => {
     const [selected, setSelected] = useState("");
+    const storeProducts = useSelector(getProducts);
+    const dispatch = useDispatch();
 
     const handleAction = () => {
         console.log("test");
@@ -14,8 +18,8 @@ const ProductList = (props) => {
         <View style={styles.container}>
             <FlatList
                 style={{width: "100%", height: '100%'}}
-                data={props.displayData}
-                extraData={props.data}
+                data={storeProducts}
+                extraData={storeProducts}
                 renderItem={({item, index}) => <Product product={item} index={index} action={handleAction} selected={selected} />}
                 keyExtractor={(product) => product.id}
                 getItemLayout={(data, index) => (

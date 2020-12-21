@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "../../../actions/products.js";
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
 import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
 
-let testObj = [
-    // {id: String(new Date().getTime() + 1), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("11/23/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 2), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/15/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 3), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 4), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("12/25/2020").toLocaleDateString("en-us"), expired: false, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 5), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 6), title: "Chicken", category: "Meat", location: "All", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 7), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-    // {id: String(new Date().getTime() + 8), title: "Chicken", category: "Meat", location: "Fridge", expirationDate: new Date("1/1/2021").toLocaleDateString("en-us"), expired: true, quantity: 5, unit: "lb"},
-]
+// Pull from
+const getProducts = state => state.products.products;
 
 const Dashboard = ({navigation}) => {
-    const [masterData, setMasterData] = useState(testObj);
-    const [tabs, setTabs] = useState([
-        {id: "tab0", title: "All"},
-    ]);
+    // Call our data set
+    const storeProducts = useSelector(getProducts);
+    const dispatch = useDispatch();
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
-
+    
     // Wrapped the hook in function to let us update data set to only show items located
     // In that selected tab
     const handleTabSwitch = (id) => {
@@ -33,6 +25,7 @@ const Dashboard = ({navigation}) => {
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
+        {console.log(storeProducts)}
             <View style={styles.container}>
                 {/*  Top part of dashboard   */}
                 <View style={styles.topContainer}>
@@ -62,16 +55,10 @@ const Dashboard = ({navigation}) => {
                 </View>
                 {/*  List portion of dashboard   */}
                 <PantryBoard 
-                    tabs={tabs}
                     selected={selectedTab}
                     setSelectedTab={handleTabSwitch}
-                    data={masterData}
-                    setData={setMasterData}
                 />
-                <ProductList
-                    displayData={masterData}
-                    setData={setMasterData}
-                />
+                <ProductList />
                 <UserInterface
                     navigation={navigation}
                     source={require('../../../assets/images/plus.png')}
