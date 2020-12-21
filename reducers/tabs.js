@@ -2,14 +2,15 @@ const initialState = {
     "tabs": [{id: "tab0", title: "All"}]
 };
 
-const tabs = (state = initialState, action) => {
+const tabs = (state = {
+    "tabs": [{id: "tab0", title: "All"}]
+}, action) => {
     const {type, payload} = action;
 
     switch(type) {
         case "TABS_ADD":
-            console.log("Test")
-            state = [...state, payload];
-            return [...state];
+            state.tabs = [...state.tabs, payload];
+            return {...state};
         case "TABS_EDIT":
             let newTabs = [];
 
@@ -18,12 +19,12 @@ const tabs = (state = initialState, action) => {
                 else newTabs.push(payload);
             })
 
-            state = [...newTabs];
+            state.tabs = [...newTabs];
             
-            return [...state];
+            return {...state};
         case "TABS_DELETE":
             state = state.filter(tab => tab.id !== payload.id);
-            return [...state]
+            return {...state}
         default:
             return state;
     }
