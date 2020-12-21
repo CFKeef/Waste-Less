@@ -11,6 +11,7 @@ import InputFieldLabel from '../../atoms/InputFieldLabel/InputFieldLabel'
 import InputField from '../../atoms/InputField/InputField';
 import GenericButton from "../../atoms/Button/Button.js"
 import CategoryInput from "../../atoms/CategoryInput";
+import Err from "../../atoms/Err";
 
 // Data
 const getProducts = state => state.products.products;
@@ -21,48 +22,65 @@ const AddProductForm = (props) => {
     const storeProducts = useSelector(getProducts);
     const storeTabs = useSelector(getTabs);
     const dispatch = useDispatch();
-
-    const [id, setID] = useState("");
+    const [err, setErr] = useState(false);
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [location, setLocation] = useState("");
     const [expirationDate, setExpirationDate] = useState("");
-    const [quantity, setQuantity] = useState("");
+    const [quantity, setQuantity] = useState("1");
     const [unit, setUnit] = useState("");
 
     const addProductSubmit = () => {
+        const validation = () => {
+            switch(true) {
+                case !title.length > 0 || title === "":
+                case category === null || category === "":
+                case !location.length > 0 || location === "":
+                case expirationDate === "Invalid Date" || expirationDate === "":
+                    return false;
+                default: 
+                    return true;                
+            }
+        };
         const resetState = () => {
-            setID("");
             setTitle("");
             setCategory("");
             setLocation("");
             setExpirationDate("");
-            setQuantity("");
+            setQuantity("1");
             setUnit("");
+            setErr(false);
             props.setAddProductShown(false);
         }
-        const newProduct = {
-            id: "prod" + title + new Date().getTime(),
-            title: title,
-            category: category,
-            location: location,
-            expirationDate: new Date(expirationDate).toLocaleDateString("en-us"),
-            quantity: quantity,
-            unit: unit
-        };
-
-        // Create the location if its not already made
-        if(storeTabs.filter(x => x.title === newProduct.title).length === 0) {
-            dispatch(addTab({id: Math.random().toString(36).substr(2, 9), title: newProduct.location}));
+        
+        if(!validation()) {
+            setErr(true);
         }
+        else {
+            const newProduct = {
+                id: "prod" + title + new Date().getTime(),
+                title: title,
+                category: category,
+                location: location,
+                expirationDate: new Date(expirationDate).toLocaleDateString("en-us"),
+                quantity: quantity.split(" ")[0],
+                unit: quantity.split(" ")[1] === undefined ? "" : quantity.split(" ")[1]
+            };
 
-        resetState();
-        dispatch(addProduct(newProduct))
+            // Create the location if its not already made
+            if(storeTabs.filter(x => x.title === newProduct.title).length === 0) {
+                dispatch(addTab({id: Math.random().toString(36).substr(2, 9), title: newProduct.location}));
+            }
+
+            resetState();
+            dispatch(addProduct(newProduct))
+        }
     };
 
     return (
         <View style={styles.formContainer}>
             <View style={styles.posContainer}>
+                {err ? <Err /> : null}
                 <View style={styles.inputsContainer}>
                     <View>  
                         <InputFieldLabel
@@ -106,7 +124,7 @@ const AddProductForm = (props) => {
                             text={"How much do you have?"}
                         />
                         <InputField
-                            placeholder={"Quantity"}
+                            placeholder={"Enter Quantity and unit seperated by a space"}
                             value={quantity}
                             setValue={setQuantity}
                             secure={false}
