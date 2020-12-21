@@ -10,6 +10,7 @@ import Register from './src/scenes/register/register.js';
 import Recover from './src/scenes/recover/recover.js';
 import LinkSent from './src/scenes/LinkSent/LinkSent.js';
 import ChangePassword from './src/scenes/ChangePassword/ChangePassword.js';
+import BarcodeScanner from './src/scenes/BarcodeScanner';
 
 const Stack = createStackNavigator();
 

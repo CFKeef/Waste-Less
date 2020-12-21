@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
+        fontWeight: "700",
         letterSpacing: 1
     },
     activeText: {

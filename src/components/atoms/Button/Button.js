@@ -16,7 +16,7 @@ const GenericButton = (props) => {
                 style={{
                     color: props.textColor, 
                     textAlign: "center", 
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: "600"
                 }}
             >

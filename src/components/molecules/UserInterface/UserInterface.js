@@ -2,15 +2,26 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 
 const UserInterface = (props) => {
+    const handleClick= (procedure) => {
+        if(procedure === "addProduct") {    
+            props.setAddProductShown(!props.addProductShown)
+            props.setAddTabShown(false)
+        }
+        else {
+            props.setAddTabShown(!props.addTabShown)
+            props.setAddProductShown(false)
+        }
+    };
+
     return (
         <View style={styles.container}>
            <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.touchable} onPress={() => console.log("TEST!")}>
+                <TouchableOpacity style={styles.touchable} onPress={() => handleClick("addTab")}>
                     <Text style={styles.touchableText}>Add Tab</Text>
                 </TouchableOpacity>
            </View>  
            <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.touchable} onPress={() => props.setAddProductShown(!props.addProductShown)}>
+                <TouchableOpacity style={styles.touchable} onPress={() => handleClick("addProduct")}>
                     <Text style={styles.touchableText}>{props.addProductShown ? "Cancel" : "Add Product"}</Text>
                 </TouchableOpacity>
            </View>

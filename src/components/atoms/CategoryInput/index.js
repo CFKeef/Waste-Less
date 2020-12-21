@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import {View, StyleSheet, Text, Image,TouchableOpacity } from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 
 import InputFieldLabel from '../InputFieldLabel/InputFieldLabel.js';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const CategoryInput = (props) => {
     return(
-        <View>
+        <View style={{zIndex: 3}}>
             <InputFieldLabel
                 text={"Category"}
             />
@@ -22,7 +22,7 @@ const CategoryInput = (props) => {
                 style={styles.backgroundColor}
                 itemStyle={styles.itemStyle}
                 dropDownStyle={styles.backgroundColor}
-                dropDownMaxHeight={80}
+                dropDownMaxHeight={160}
                 defaultValue={props.category.value}
                 placeholder="Select a category"
                 placeholderStyle={styles.placeholderStyle}
@@ -43,12 +43,10 @@ const styles = StyleSheet.create({
     },
     itemStyle: {
         justifyContent: 'flex-start',
-        zIndex: 3
     },
     containerStyle: {
         height: 40, 
         backgroundColor: "#E2E6FF", 
-        zIndex: 3
     }
 })
 

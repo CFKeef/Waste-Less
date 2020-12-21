@@ -2,11 +2,12 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from "../../../actions/products.js";
+
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
 import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
 import AddProductForm from '../../components/molecules/AddProductForm/AddProductForm.js';
+import AddTabForm from '../../components/molecules/AddTabForm';
 
 // Pull from
 const getProducts = state => state.products.products;
@@ -17,6 +18,7 @@ const Dashboard = ({navigation}) => {
     const dispatch = useDispatch();
 
     const [addProductShown, setAddProductShown] = useState(false);     
+    const [addTabShown, setAddTabShown] = useState(false);
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
     
@@ -60,12 +62,17 @@ const Dashboard = ({navigation}) => {
                     selected={selectedTab}
                     setSelectedTab={handleTabSwitch}
                 />
-                {addProductShown ? <AddProductForm setAddProductShown={setAddProductShown} /> : null}
+                {addProductShown ? <AddProductForm 
+                                    setAddProductShown={setAddProductShown} 
+                                    navigation={navigation}/> : null}
+                {addTabShown ? <AddTabForm setAddTabShown={setAddTabShown} /> : null}
                 <ProductList />
                 <UserInterface
                     navigation={navigation}
                     addProductShown={addProductShown}
                     setAddProductShown={setAddProductShown}
+                    addTabShown={addTabShown}
+                    setAddTabShown={setAddTabShown}
                 />
             </View>
         </SafeAreaView>
