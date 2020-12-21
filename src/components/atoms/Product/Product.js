@@ -1,7 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 
-import Meat from './meat.png'
+import Meat from './meat.png';
+import Fruit from './fruits.png';
+import Grain from './grain.png';
+import Vegetable from './vegetable.png';
+import Other from './other.png';
 
 const Product = (props) => {
     const handleExpirationText = () => {
@@ -16,10 +20,27 @@ const Product = (props) => {
         }
     };
 
-    const handleItemImage = (category) => {
-        switch (category) {
+    const handleItemImageStyling = (category) => {
+        switch (category.label) {
             case "Meat":
-                return Meat
+                return styles.meatImg;
+            default:
+                return styles.sameSizeImg;
+        }
+    }
+
+    const handleItemImage = (category) => {
+        switch (category.label) {
+            case "Meat":
+                return Meat;
+            case "Produce":
+                return Vegetable;
+            case "Fruit":
+                return Fruit;
+            case "Grain":
+                return Grain;
+            default:
+                return Other;
         }
     }
 
@@ -40,7 +61,7 @@ const Product = (props) => {
                 <View style={styles.cardContainer}>
                     <View style={[styles.textContainer, styles.leftContainer]}>
                         <Image 
-                            style={styles.categoryImg}
+                            style={[handleItemImageStyling(props.product.category),styles.categoryImg]}
                             source={handleItemImage(props.product.category)}
                         />
                         <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.leftText]}>{props.product.title}</Text>
@@ -106,8 +127,6 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     categoryImg: {
-        height: 17,
-        width: 24,
         marginRight: 10
     },
     otherText: {
@@ -121,7 +140,15 @@ const styles = StyleSheet.create({
     },
     expiredText: {
         color: "#F06775"
-    }
+    },
+    meatImg: {
+        height: 17,
+        width: 24,
+    },
+    sameSizeImg: {
+        height: 17,
+        width: 17,
+    },
 })
 
 export default Product;
