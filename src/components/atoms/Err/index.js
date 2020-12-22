@@ -17,10 +17,11 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        top: -20,
+        top: 50,
         borderRadius: 5,
         paddingLeft: 10,
-        paddingRight: 10
+        paddingRight: 10,
+        zIndex: 3
     },
     errText: {
         color: "white",

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { useSelector, useDispatch } from "react-redux";
 
 // Actions
@@ -78,9 +79,10 @@ const AddProductForm = (props) => {
     };
 
     return (
-        <View style={styles.formContainer}>
+        <KeyboardAwareScrollView
+            style={styles.formContainer}
+        >
             <View style={styles.posContainer}>
-                {err ? <Err /> : null}
                 <View style={styles.inputsContainer}>
                     <View>  
                         <InputFieldLabel
@@ -139,10 +141,12 @@ const AddProductForm = (props) => {
                         textColor={"#FFD5CE"}
                         color={"#592CBA"}
                     />
+                    {err ? <Err /> : null}
                 </View>
             </View>
-        </View>
-    )
+        </KeyboardAwareScrollView>
+        )
+
 };
 
 const styles = StyleSheet.create({
