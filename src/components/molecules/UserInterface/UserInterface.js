@@ -17,7 +17,7 @@ const UserInterface = (props) => {
         <View style={styles.container}>
            <View style={styles.btnContainer}>
                 <TouchableOpacity style={styles.touchable} onPress={() => handleClick("addTab")}>
-                    <Text style={styles.touchableText}>Add Tab</Text>
+                    <Text style={styles.touchableText}>{props.addTabShown ? "Cancel" : "Add Tab"}</Text>
                 </TouchableOpacity>
            </View>  
            <View style={styles.btnContainer}>
