@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {StyleSheet, Text, View, Switch} from 'react-native';
+import axios from 'axios';
 import InputField from '../../atoms/InputField/InputField.js';
 import InputFieldLabel from '../../atoms/InputFieldLabel/InputFieldLabel.js';
 import GenericButton from "../../atoms/Button/Button.js"
@@ -18,6 +19,7 @@ const SignupForm = (props) => {
             case email.length === 0:
             case password.length === 0:
             case confirmedPassword.length === 0:
+            case password != confirmedPassword:
                 setError(true);
                 break;
             default:
@@ -28,7 +30,27 @@ const SignupForm = (props) => {
     }
 
     const handleSignup = () => {
-        props.navigation.navigate("LinkSent");
+        const resetState = () => {
+            setEmail("");
+            setPassword("");
+            setConfirmedPassword("");
+            setTermsCheck(false);
+            setNewsLetterCheck(false);
+            setError(false);
+        }
+        console.log(email);
+        axios.post("http://192.168.1.194:19005/signup", {
+            email: email,
+            pw: password
+        })
+        .then(res =>{
+            if(res.status === 200) props.navigation.navigate("LinkSent");
+            resetState()
+        })
+        .catch(err => {
+            setError(true);
+        });
+        
     }
 
     const handleWrongInputs = () => {

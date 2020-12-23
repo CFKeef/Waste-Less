@@ -10,7 +10,6 @@ import Register from './src/scenes/register/register.js';
 import Recover from './src/scenes/recover/recover.js';
 import LinkSent from './src/scenes/LinkSent/LinkSent.js';
 import ChangePassword from './src/scenes/ChangePassword/ChangePassword.js';
-import BarcodeScanner from './src/scenes/BarcodeScanner';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +21,7 @@ export default function App() {
           screenOptions={{
             headerShown: false
           }}
-          initialRouteName="Dashboard"
+          initialRouteName="Register"
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
