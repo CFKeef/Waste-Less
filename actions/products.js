@@ -18,3 +18,10 @@ export const editProduct = payload => {
         payload: payload
     };
 };
+
+export const filterProducts = payload => {
+    return {
+        type: 'PRODUCTS_FILTERED',
+        payload: payload
+    };
+};

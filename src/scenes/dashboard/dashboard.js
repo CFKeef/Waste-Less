@@ -11,22 +11,18 @@ import AddTabForm from '../../components/molecules/AddTabForm';
 
 // Pull from
 const getProducts = state => state.products.products;
+const getTabs = state => state.tabs.tabs;
 
 const Dashboard = ({navigation}) => {
     // Call our data set
     const storeProducts = useSelector(getProducts);
+    const storeTabs = useSelector(getTabs);
     const dispatch = useDispatch();
 
     const [addProductShown, setAddProductShown] = useState(false);     
     const [addTabShown, setAddTabShown] = useState(false);
     const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
-    
-    // Wrapped the hook in function to let us update data set to only show items located
-    // In that selected tab
-    const handleTabSwitch = (id) => {
-        setSelectedTab(id);
-    }
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
@@ -60,7 +56,6 @@ const Dashboard = ({navigation}) => {
                 {/*  List portion of dashboard   */}
                 <PantryBoard 
                     selected={selectedTab}
-                    setSelectedTab={handleTabSwitch}
                 />
                 {addProductShown ? <AddProductForm 
                                     setAddProductShown={setAddProductShown} 

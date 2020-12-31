@@ -10,17 +10,13 @@ const ProductList = (props) => {
     const storeProducts = useSelector(getProducts);
     const dispatch = useDispatch();
 
-    const handleAction = () => {
-        console.log("test");
-    }
-
     return (
         <View style={styles.container}>
             <FlatList
                 style={{width: "100%", height: '100%'}}
                 data={storeProducts}
                 extraData={storeProducts}
-                renderItem={({item, index}) => <Product product={item} index={index} action={handleAction} selected={selected} />}
+                renderItem={({item, index}) => <Product product={item} index={index} />}
                 keyExtractor={(product) => product.id}
                 getItemLayout={(data, index) => (
                     {length: 80, offset: 80 * index, index}

@@ -14,12 +14,8 @@ const ListTab = (props) => {
         return props.tab.id === props.selected ? [styles.text, styles.activeText] : [styles.text, styles.inactiveText]
     }
 
-    const handleInteraction = (tab) => {
-        props.action(tab);
-    }
-
     return (
-        <TouchableOpacity style={handleContainerStyling()} onPress={() => {handleInteraction(props.tab)}}>
+        <TouchableOpacity style={handleContainerStyling()} onPress={() => {}}>
                 <Text numberOfLines={1} style={handleTextStyling()}>{props.tab.title}</Text>
         </TouchableOpacity>
     )

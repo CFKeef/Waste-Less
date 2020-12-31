@@ -9,9 +9,6 @@ const getTabs = state => state.tabs.tabs;
 const PantryBoard = (props) => {
     const storeTabs = useSelector(getTabs);
     const dispatch = useDispatch();
-    const handleAction = (tab) => {
-        props.setSelectedTab(tab.id);
-    }
 
     return (
         <View style={styles.container}>
@@ -21,7 +18,7 @@ const PantryBoard = (props) => {
                     horizontal={true}
                     data={storeTabs}
                     extraData={storeTabs}
-                    renderItem={({item}) => <ListTab tab={item} action={handleAction} selected={props.selected} />}
+                    renderItem={({item}) => <ListTab tab={item} selected={props.selected} />}
                     keyExtractor={(tab) => tab.id}
                     removeClippedSubviews={false}
                 />
