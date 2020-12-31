@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import InputField from '../../atoms/InputField/InputField.js';
 import InputFieldLabel from '../../atoms/InputFieldLabel/InputFieldLabel.js';
-import GenericButton from "../../atoms/Button/Button.js"
+import GenericButton from "../../atoms/Button/Button.js";
+import axios from 'axios';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState("");
@@ -23,8 +24,22 @@ const LoginForm = (props) => {
     }
 
     const handleLogin = () => {
-        console.log(email + " " + password);
-        props.navigation.navigate("Dashboard");
+        axios.post("http://192.168.1.194:19005/login", {
+            email: email,
+            pw: password
+        })
+        .then(res =>{
+            if(res.status === 200) {
+                props.navigation.navigate("Dashboard");
+                resetState()
+            }
+            else {
+                setError(true);
+            }
+        })
+        .catch(err => {
+            setError(true);
+        });
     }
 
     const handleWrongLogin = () => {
