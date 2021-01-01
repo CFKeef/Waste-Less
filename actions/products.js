@@ -1,10 +1,3 @@
-export const selectProduct = payload => {
-    return {
-        type: 'PRODUCTS_SELECTED',
-        payload: payload
-    };
-};
-
 export const addProduct = payload => {
     return {
         type: 'PRODUCTS_ADD',

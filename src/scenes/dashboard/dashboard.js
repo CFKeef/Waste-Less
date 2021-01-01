@@ -3,6 +3,10 @@ import { View, Text, SafeAreaView, StyleSheet, Image, TextInput} from 'react-nat
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from "react-redux";
 
+import {selectTab, selectProductList} from '../../../actions/selects';
+import {setDisplayStoreList} from '../../../actions/flags';
+
+
 import PantryBoard from '../../components/molecules/PantryBoard/PantryBoard.js';
 import ProductList from '../../components/molecules/ProductList/ProductList.js';
 import UserInterface from '../../components/molecules/UserInterface/UserInterface.js';
@@ -12,17 +16,28 @@ import AddTabForm from '../../components/molecules/AddTabForm';
 // Pull from
 const getProducts = state => state.products.products;
 const getTabs = state => state.tabs.tabs;
+const getIsStoreListDisplayed = state => state.flags.isStoreListDisplayed;
 
 const Dashboard = ({navigation}) => {
     // Call our data set
     const storeProducts = useSelector(getProducts);
     const storeTabs = useSelector(getTabs);
+    const storeProductFlag= useSelector(getIsStoreListDisplayed);
     const dispatch = useDispatch();
 
     const [addProductShown, setAddProductShown] = useState(false);     
     const [addTabShown, setAddTabShown] = useState(false);
-    const [selectedTab, setSelectedTab] = useState("tab0");
     const [target, setTarget] = useState("");
+
+    const handleTabClick = (tab) => {
+        const handleProducts = () =>{
+            if(tab.title !== "All") return storeProducts.filter(x => x.location === tab.title);
+            else return storeProducts
+        }
+        dispatch(selectTab(tab));
+        dispatch(setDisplayStoreList(false));
+        dispatch(selectProductList(handleProducts()))
+    };
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
@@ -55,7 +70,7 @@ const Dashboard = ({navigation}) => {
                 </View>
                 {/*  List portion of dashboard   */}
                 <PantryBoard 
-                    selected={selectedTab}
+                    handleTabClick={handleTabClick}
                 />
                 {addProductShown ? <AddProductForm 
                                     setAddProductShown={setAddProductShown} 

@@ -5,20 +5,23 @@ import { useSelector, useDispatch } from "react-redux";
 import ListTab from "../../atoms/ListTab/ListTab.js";
 
 const getTabs = state => state.tabs.tabs;
+const getSelectedTab = state => state.selects.tab;
 
 const PantryBoard = (props) => {
     const storeTabs = useSelector(getTabs);
+    const storeSelectedTab = useSelector(getSelectedTab);
     const dispatch = useDispatch();
 
     return (
         <View style={styles.container}>
+        {console.log(storeSelectedTab)}
             <View style={styles.tabContainer}>
                 <FlatList
                     style={{width: "100%"}}
                     horizontal={true}
                     data={storeTabs}
                     extraData={storeTabs}
-                    renderItem={({item}) => <ListTab tab={item} selected={props.selected} />}
+                    renderItem={({item}) => <ListTab tab={item} selected={storeSelectedTab} action={props.handleTabClick} />}
                     keyExtractor={(tab) => tab.id}
                     removeClippedSubviews={false}
                 />
