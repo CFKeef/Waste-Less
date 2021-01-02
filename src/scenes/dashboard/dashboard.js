@@ -39,6 +39,10 @@ const Dashboard = ({navigation}) => {
         dispatch(selectProductList(handleProducts()))
     };
 
+    const handleProductClick = (product) => {
+        dispatch(selectProduct(product));
+    };
+
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#FBF6F2",}}>
             <View style={styles.container}>
@@ -76,7 +80,9 @@ const Dashboard = ({navigation}) => {
                                     setAddProductShown={setAddProductShown} 
                                     navigation={navigation}/> : null}
                 {addTabShown ? <AddTabForm setAddTabShown={setAddTabShown} /> : null}
-                <ProductList />
+                <ProductList 
+                    handleProductClick={handleProductClick}
+                />
                 <UserInterface
                     navigation={navigation}
                     addProductShown={addProductShown}

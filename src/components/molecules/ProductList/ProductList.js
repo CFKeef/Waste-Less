@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Product from '../../atoms/Product/Product.js';
 const getProducts = state => state.products.products;
 const getIsStoreListDisplayed = state => state.flags.isStoreListDisplayed;
-const getSelectedProductList= state => state.selects.productList;
+const getSelectedProductList = state => state.selects.productList;
+const getSelectedProduct = state => state.selects.product;
 
 const ProductList = (props) => {
-    const [selected, setSelected] = useState("");
     const storeProducts = useSelector(getProducts);
-    const storeProductFlag= useSelector(getIsStoreListDisplayed);
-    const storeSelectedProductList= useSelector(getSelectedProductList);
+    const storeProductFlag = useSelector(getIsStoreListDisplayed);
+    const storeSelectedProductList = useSelector(getSelectedProductList);
+    const storeSelectedProduct = useSelector(getSelectedProduct);
     const dispatch = useDispatch();
 
     const handleDataSwap = () => {
@@ -20,11 +21,12 @@ const ProductList = (props) => {
 
     return (
         <View style={styles.container}>
+        {console.log(storeSelectedProduct)}
             <FlatList
                 style={{width: "100%", height: '100%'}}
                 data={handleDataSwap()}
                 extraData={handleDataSwap()}
-                renderItem={({item, index}) => <Product product={item} index={index} />}
+                renderItem={({item, index}) => <Product product={item} index={index} selected={storeSelectedProduct} />}
                 keyExtractor={(product) => product.id}
                 getItemLayout={(data, index) => (
                     {length: 80, offset: 80 * index, index}
