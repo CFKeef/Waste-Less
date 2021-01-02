@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { useSelector, useDispatch } from "react-redux";
+import axios from 'axios';
 
 // Actions
 import { addProduct } from "../../../../actions/products.js";
@@ -17,10 +18,11 @@ import Err from "../../atoms/Err";
 // Data
 const getProducts = state => state.products.products;
 const getTabs = state => state.tabs.tabs;
-
+const getAccount = state => state.accounts;
 
 const AddProductForm = (props) => {
     const storeProducts = useSelector(getProducts);
+    const storeAccount = useSelector(getAccount);
     const storeTabs = useSelector(getTabs);
     const dispatch = useDispatch();
     const [err, setErr] = useState(false);
@@ -30,6 +32,17 @@ const AddProductForm = (props) => {
     const [expirationDate, setExpirationDate] = useState("");
     const [quantity, setQuantity] = useState("1");
     const [unit, setUnit] = useState("");
+
+    const resetState = () => {
+        setTitle("");
+        setCategory("");
+        setLocation("");
+        setExpirationDate("");
+        setQuantity("1");
+        setUnit("");
+        setErr(false);
+        props.setAddProductShown(false);
+    };
 
     const addProductSubmit = () => {
         const validation = () => {
@@ -43,23 +56,13 @@ const AddProductForm = (props) => {
                     return true;                
             }
         };
-        const resetState = () => {
-            setTitle("");
-            setCategory("");
-            setLocation("");
-            setExpirationDate("");
-            setQuantity("1");
-            setUnit("");
-            setErr(false);
-            props.setAddProductShown(false);
-        }
         
         if(!validation()) {
             setErr(true);
         }
         else {
             const newProduct = {
-                id: "prod" + title + new Date().getTime(),
+                id: Math.random().toString(36).substr(2, 9),
                 title: title,
                 category: category,
                 location: location,
@@ -67,15 +70,44 @@ const AddProductForm = (props) => {
                 quantity: quantity.split(" ")[0],
                 unit: quantity.split(" ")[1] === undefined ? "" : quantity.split(" ")[1]
             };
-
             // Create the location if its not already made
-            if(storeTabs.filter(x => x.title === newProduct.title).length === 0) {
-                dispatch(addTab({id: Math.random().toString(36).substr(2, 9), title: newProduct.location}));
+            if(storeTabs.filter(x => x.title === newProduct.location).length === 0) {
+              addTabToDB(newProduct.location);  
             }
-
-            resetState();
-            dispatch(addProduct(newProduct))
+            addProductToDB(newProduct);
         }
+    };
+    const addTabToDB = (location) => {
+        const id = Math.random().toString(36).substr(2, 9);
+        axios.post("http://192.168.1.194:19005/addTab", {
+            id: id,
+            location: location,
+            accountID: storeAccount.accountID
+        })
+        .then(res =>{
+            if(res.status === 200) {
+                dispatch(addTab({id: id, title: location}));
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    const addProductToDB = (newProduct) => {
+        axios.post("http://192.168.1.194:19005/addProduct", {
+            product: newProduct,
+            pantryID: storeAccount.pantryID,
+            accountID: storeAccount.accountID
+        })
+        .then(res =>{
+            if(res.status === 200) {
+                dispatch(addProduct(newProduct));
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        .then(resetState());
     };
 
     return (

@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import InputField from '../../atoms/InputField/InputField.js';
 import InputFieldLabel from '../../atoms/InputFieldLabel/InputFieldLabel.js';
+import {useDispatch} from 'react-redux';
 import GenericButton from "../../atoms/Button/Button.js";
 import axios from 'axios';
+
+import {setAccount} from '../../../../actions/accounts';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
+    const dispach = useDispatch();
 
     const validation = () => {
         switch(true) {
@@ -31,6 +35,7 @@ const LoginForm = (props) => {
         .then(res =>{
             if(res.status === 200) {
                 props.navigation.navigate("Dashboard");
+                dispach(setAccount(res.data));
                 resetState()
             }
             else {

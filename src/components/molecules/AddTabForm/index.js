@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { useSelector, useDispatch } from "react-redux";
+import axios from 'axios';
 
 // Actions
 import { addTab } from "../../../../actions/tabs.js";
@@ -14,14 +15,21 @@ import Err from "../../atoms/Err";
 
 // Data
 const getTabs = state => state.tabs.tabs;
+const getAccount = state => state.accounts;
 
 const AddTabForm = (props) => {
     const storeTabs = useSelector(getTabs);
+    const storeAccount = useSelector(getAccount);
     const dispatch = useDispatch();
 
     const [err, setErr] = useState(false);
     const [title, setTitle] = useState("");
     
+    const resetState = () => {
+        setTitle("");
+        setErr(false);
+        props.setAddTabShown(false);
+    }
 
     const addTabSubmit = () => {
         const validation = () => {
@@ -31,24 +39,32 @@ const AddTabForm = (props) => {
                     return true;                
             }
         };
-        const resetState = () => {
-            setTitle("");
-            setErr(false);
-            props.setAddTabShown(false);
-        }
+        
         
         if(!validation()) {
             setErr(true);
         }
         else {
-            const newTab = {
-                id: "prod" + title + new Date().getTime(),
-                title: title
-            };
-
-            resetState();
-            dispatch(addTab(newTab))
+            addTabToDB(title);
         }
+    }
+
+    const addTabToDB = (location) => {
+        const id = Math.random().toString(36).substr(2, 9);
+        axios.post("http://192.168.1.194:19005/addTab", {
+            id: id,
+            location: location,
+            accountID: storeAccount.accountID
+        })
+        .then(res =>{
+            if(res.status === 200) {
+                dispatch(addTab({id: id, title: location}));
+                resetState();
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (

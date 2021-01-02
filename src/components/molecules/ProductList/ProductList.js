@@ -21,11 +21,10 @@ const ProductList = (props) => {
 
     return (
         <View style={styles.container}>
-        {console.log(storeSelectedProduct)}
             <FlatList
                 style={{width: "100%", height: '100%'}}
                 data={handleDataSwap()}
-                extraData={handleDataSwap()}
+                extraData={storeProducts}
                 renderItem={({item, index}) => <Product product={item} index={index} selected={storeSelectedProduct} />}
                 keyExtractor={(product) => product.id}
                 getItemLayout={(data, index) => (

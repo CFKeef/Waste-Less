@@ -14,7 +14,6 @@ const PantryBoard = (props) => {
 
     return (
         <View style={styles.container}>
-        {console.log(storeSelectedTab)}
             <View style={styles.tabContainer}>
                 <FlatList
                     style={{width: "100%"}}

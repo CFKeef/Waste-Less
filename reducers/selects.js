@@ -12,9 +12,9 @@ const selects = (state = {
         case "SELECT_TAB":
             state.tab = payload
             return {...state}
-            case "SELECT_PRODUCTLIST":
-                state.productList = payload
-                return {...state}
+        case "SELECT_PRODUCTLIST":
+            state.productList = payload
+            return {...state}
         default:
             return state;
     }

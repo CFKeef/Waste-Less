@@ -1,5 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
+import { useSelector, useDispatch } from "react-redux";
+
+import {selectProduct} from '../../../../actions/selects';
 
 import Meat from './meat.png';
 import Fruit from './fruits.png';
@@ -7,7 +10,35 @@ import Grain from './grain.png';
 import Vegetable from './vegetable.png';
 import Other from './other.png';
 
+const getSelectedProduct = state => state.selects.product;
+
 const Product = (props) => {
+    const storeSelectedProduct = useSelector(getSelectedProduct);
+    const dispatch = useDispatch();
+
+    const handleSelectionCheck = (product) => {
+        if (product.id === storeSelectedProduct.id) {
+            return (
+                <View style={styles.controlsContainer}>
+                    <TouchableOpacity onPress={() => {}}>
+                        <Text>Add To Shopping</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {}}>
+                        <Text>Edit</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {}}>
+                        <Text>Delete</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        } 
+    }
+
+    const handleClick = (product) => {
+        if (product.id === storeSelectedProduct.id) dispatch(selectProduct({}));
+        else dispatch(selectProduct(product));
+    }
+
     const handleExpirationText = () => {
         let timeDiff = new Date(props.product.expirationDate).getTime() - new Date().getTime();
         let daysSince = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -56,7 +87,7 @@ const Product = (props) => {
     };
 
     return (
-        <TouchableOpacity key={props.product.title + props.product.index} style={styles.container}>
+        <TouchableOpacity key={props.product.title + props.product.index} style={styles.container} onPress={() => {handleClick(props.product)}}>
             <View style={styles.posContainer}>
                 <View style={styles.cardContainer}>
                     <View style={[styles.textContainer, styles.leftContainer]}>
@@ -79,6 +110,7 @@ const Product = (props) => {
                     </View>
                 </View>
             </View>
+            {handleSelectionCheck(props.product)}
         </TouchableOpacity>
     )
 };
@@ -149,6 +181,12 @@ const styles = StyleSheet.create({
         height: 17,
         width: 17,
     },
+    controlsContainer: {
+        position:"absolute",
+        flexDirection: "row",
+        width: "100%",
+        bottom: 0
+    }
 })
 
 export default Product;
