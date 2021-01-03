@@ -12,6 +12,13 @@ export const editTab = payload => {
     }
 }
 
+export const setTabs = payload => {
+    return {
+        type: "TABS_SET",
+        payload: payload
+    }
+}
+
 export const deleteTab = payload => {
     return {
         type: "TABS_DELETE",

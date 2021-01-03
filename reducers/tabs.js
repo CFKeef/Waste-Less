@@ -1,5 +1,5 @@
 const tabs = (state = {
-    "tabs": [{id: "tab0", title: "All"}]
+    "tabs": [{id: "tab0", location: "All"}]
 }, action) => {
     const {type, payload} = action;
 
@@ -20,6 +20,9 @@ const tabs = (state = {
             return {...state};
         case "TABS_DELETE":
             state = state.filter(tab => tab.id !== payload.id);
+            return {...state}
+        case "TABS_SET":
+            state = [{id: "tab0", location: "All"},...payload]
             return {...state}
         default:
             return state;

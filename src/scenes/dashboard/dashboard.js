@@ -15,7 +15,7 @@ import AddTabForm from '../../components/molecules/AddTabForm';
 
 // Pull from
 const getProducts = state => state.products.products;
-const getTabs = state => state.tabs.tabs;
+const getTabs = state => state.tabs;
 const getIsStoreListDisplayed = state => state.flags.isStoreListDisplayed;
 
 const Dashboard = ({navigation}) => {
@@ -31,7 +31,7 @@ const Dashboard = ({navigation}) => {
 
     const handleTabClick = (tab) => {
         const handleProducts = () =>{
-            if(tab.title !== "All") return storeProducts.filter(x => x.location === tab.title);
+            if(tab.location !== "All") return storeProducts.filter(x => x.location === tab.location);
             else return storeProducts
         }
         dispatch(selectTab(tab));

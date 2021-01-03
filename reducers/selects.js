@@ -1,5 +1,5 @@
 const selects = (state = {
-    "tab": {id: "tab0", title: "All"},
+    "tab": {id: "tab0", location: "All"},
     "product": {},
     "productList": []
 }, action) => {

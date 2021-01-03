@@ -7,6 +7,7 @@ import GenericButton from "../../atoms/Button/Button.js";
 import axios from 'axios';
 
 import {setAccount} from '../../../../actions/accounts';
+import {setTabs} from '../../../../actions/tabs';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState("");
@@ -34,9 +35,10 @@ const LoginForm = (props) => {
         })
         .then(res =>{
             if(res.status === 200) {
+                dispach(setAccount({email: res.data.email, accountID: res.data.accountID, pantryID: res.data.pantryID}));
+                dispach(setTabs(res.data.tabs));
                 props.navigation.navigate("Dashboard");
-                dispach(setAccount(res.data));
-                resetState()
+                resetState();
             }
             else {
                 setError(true);

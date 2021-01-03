@@ -3,7 +3,6 @@ import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 
 const ListTab = (props) => {
-
     // Determines if the tab is the current active one and changes the container styling
     const handleContainerStyling = () => {
         return props.tab.id === props.selected.id ? [styles.container, styles.active] : [styles.container, styles.inactive]
@@ -16,7 +15,7 @@ const ListTab = (props) => {
 
     return (
         <TouchableOpacity style={handleContainerStyling()} onPress={() => {props.action(props.tab)}}>
-                <Text numberOfLines={1} style={handleTextStyling()}>{props.tab.title}</Text>
+                <Text numberOfLines={1} style={handleTextStyling()}>{props.tab.location}</Text>
         </TouchableOpacity>
     )
 }
