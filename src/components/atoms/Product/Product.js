@@ -11,11 +11,13 @@ import Vegetable from './vegetable.png';
 import Other from './other.png';
 
 const getSelectedProduct = state => state.selects.product;
+const getTabs = state => state.tabs.tabs;
 
 const Product = (props) => {
+    const storeTabs = useSelector(getTabs);
     const storeSelectedProduct = useSelector(getSelectedProduct);
     const dispatch = useDispatch();
-
+    
     const handleSelectionCheck = (product) => {
         if (product.id === storeSelectedProduct.id) {
             return (
@@ -40,11 +42,12 @@ const Product = (props) => {
     }
 
     const handleExpirationText = () => {
-        let timeDiff = new Date(props.product.expirationDate).getTime() - new Date().getTime();
+        let expDate = new Date(props.product.expirationdate);
+        let timeDiff = expDate.getTime() - new Date().getTime();
         let daysSince = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
         if(daysSince <= 3 && daysSince >= 1) return "Expires in " + daysSince + " day";
-        else if(daysSince > 3) return "Good until " + props.product.expirationDate;
+        else if(daysSince > 3) return "Good until " + expDate.toLocaleDateString("en-us");
         else if(daysSince === 0) return "Expires Today";
         else {
             return "Expired " + Math.abs(daysSince) + " days ago";
@@ -52,8 +55,8 @@ const Product = (props) => {
     };
 
     const handleItemImageStyling = (category) => {
-        switch (category.label) {
-            case "Meat":
+        switch (category) {
+            case "meat":
                 return styles.meatImg;
             default:
                 return styles.sameSizeImg;
@@ -61,14 +64,14 @@ const Product = (props) => {
     }
 
     const handleItemImage = (category) => {
-        switch (category.label) {
-            case "Meat":
+        switch (category) {
+            case "meat":
                 return Meat;
-            case "Produce":
+            case "produce":
                 return Vegetable;
-            case "Fruit":
+            case "fruit":
                 return Fruit;
-            case "Grain":
+            case "grain":
                 return Grain;
             default:
                 return Other;
@@ -76,7 +79,7 @@ const Product = (props) => {
     }
 
     const handleExpirationStyling = () => {
-        let timeDiff = new Date(props.product.expirationDate).getTime() - new Date().getTime();
+        let timeDiff = new Date(props.product.expirationdate).getTime() - new Date().getTime();
         let daysSince = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
         if(daysSince <= 3 && daysSince >= 1) return styles.warningText;
@@ -84,6 +87,15 @@ const Product = (props) => {
         else {
             return styles.expiredText;
         }
+    };
+
+    const handleUnitText = () => {
+        return props.product.unit === "NONE" ? "Unit" : props.product.unit;
+    }
+
+    const handleLocation = () => {
+        if(storeTabs.filter(x => x.id === props.product.tabid).length > 0) return storeTabs.filter(x => x.id === props.product.tabid)[0].location;
+        else return "";
     };
 
     return (
@@ -103,10 +115,10 @@ const Product = (props) => {
                 </View>
                 <View style={styles.cardContainer}>
                     <View style={[styles.rightContainer, styles.textContainer]}>
-                        <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.rightText]}>Count: {props.product.quantity + " " + props.product.unit}</Text>
+                        <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.rightText]}>Count: {props.product.quantity + " " + handleUnitText()}</Text>
                     </View>
                     <View style={[styles.textContainer, styles.rightContainer]}>
-                        <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.rightText]}>{props.product.location}</Text>
+                        <Text numberOfLines={1} style={[styles.otherText, styles.cardText, styles.rightText]}>{handleLocation()}</Text>
                     </View>
                 </View>
             </View>

@@ -24,18 +24,23 @@ const Dashboard = ({navigation}) => {
     const storeTabs = useSelector(getTabs);
     const storeProductFlag= useSelector(getIsStoreListDisplayed);
     const dispatch = useDispatch();
-
+    
     const [addProductShown, setAddProductShown] = useState(false);     
     const [addTabShown, setAddTabShown] = useState(false);
     const [target, setTarget] = useState("");
 
     const handleTabClick = (tab) => {
         const handleProducts = () =>{
-            if(tab.location !== "All") return storeProducts.filter(x => x.location === tab.location);
-            else return storeProducts
+            if(tab.location !== "All") {
+                dispatch(setDisplayStoreList(false));
+                return storeProducts.filter(x => x.tabid === tab.id);
+            }
+            else {
+                dispatch(setDisplayStoreList(true));
+                return storeProducts;
+            }
         }
         dispatch(selectTab(tab));
-        dispatch(setDisplayStoreList(false));
         dispatch(selectProductList(handleProducts()))
     };
 

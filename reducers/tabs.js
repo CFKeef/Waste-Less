@@ -6,6 +6,7 @@ const tabs = (state = {
     switch(type) {
         case "TABS_ADD":
             state.tabs = [...state.tabs, payload];
+            console.log(state.tabs);
             return {...state};
         case "TABS_EDIT":
             let newTabs = [];
@@ -19,10 +20,10 @@ const tabs = (state = {
             
             return {...state};
         case "TABS_DELETE":
-            state = state.filter(tab => tab.id !== payload.id);
+            state.tabs = state.filter(tab => tab.id !== payload.id);
             return {...state}
         case "TABS_SET":
-            state = [{id: "tab0", location: "All"},...payload]
+            state.tabs = [{id: "tab0", location: "All"}, ...payload]
             return {...state}
         default:
             return state;

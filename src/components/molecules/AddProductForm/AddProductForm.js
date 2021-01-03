@@ -17,21 +17,21 @@ import Err from "../../atoms/Err";
 
 // Data
 const getProducts = state => state.products.products;
-const getTabs = state => state.tabs.tabs;
+const getTabs = state => state.tabs;
 const getAccount = state => state.accounts;
 
 const AddProductForm = (props) => {
     const storeProducts = useSelector(getProducts);
     const storeAccount = useSelector(getAccount);
-    const storeTabs = useSelector(getTabs);
+    const storeTabs = Object.values(useSelector(getTabs));
     const dispatch = useDispatch();
     const [err, setErr] = useState(false);
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("Danimals");
     const [category, setCategory] = useState("");
-    const [location, setLocation] = useState("");
-    const [expirationDate, setExpirationDate] = useState("");
+    const [location, setLocation] = useState("Fridge");
+    const [expirationDate, setExpirationDate] = useState("01/14/2021");
     const [quantity, setQuantity] = useState("1");
-    const [unit, setUnit] = useState("");
+    const [unit, setUnit] = useState("Box");
 
     const resetState = () => {
         setTitle("");
@@ -71,12 +71,13 @@ const AddProductForm = (props) => {
                 unit: quantity.split(" ")[1] === undefined ? "" : quantity.split(" ")[1]
             };
             // Create the location if its not already made
-            if(storeTabs.filter(x => x.title === newProduct.location).length === 0) {
+            if(storeTabs.filter(x => x.location === newProduct.location).length === 0) {
               addTabToDB(newProduct.location);  
             }
             addProductToDB(newProduct);
         }
     };
+
     const addTabToDB = (location) => {
         const id = Math.random().toString(36).substr(2, 9);
         axios.post("http://192.168.1.194:19005/addTab", {
@@ -86,13 +87,14 @@ const AddProductForm = (props) => {
         })
         .then(res =>{
             if(res.status === 200) {
-                dispatch(addTab({id: id, title: location}));
+                dispatch(addTab({id: id, location: location}));
             }
         })
         .catch(err => {
             console.log(err)
         })
-    }
+    };
+
     const addProductToDB = (newProduct) => {
         axios.post("http://192.168.1.194:19005/addProduct", {
             product: newProduct,

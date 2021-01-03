@@ -8,6 +8,7 @@ import axios from 'axios';
 
 import {setAccount} from '../../../../actions/accounts';
 import {setTabs} from '../../../../actions/tabs';
+import {setProducts} from '../../../../actions/products';
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState("");
@@ -37,6 +38,7 @@ const LoginForm = (props) => {
             if(res.status === 200) {
                 dispach(setAccount({email: res.data.email, accountID: res.data.accountID, pantryID: res.data.pantryID}));
                 dispach(setTabs(res.data.tabs));
+                dispach(setProducts(res.data.products));
                 props.navigation.navigate("Dashboard");
                 resetState();
             }

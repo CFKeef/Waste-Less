@@ -20,6 +20,9 @@ const products = (state = {
         case "PRODUCTS_DELETE":
             state.products = state.filter(product => product.id !== payload.id);
             return {...state}
+        case "PRODUCTS_SET":
+            state.products = payload;
+            return {...state}
         default:
             return state;
     }

@@ -58,7 +58,7 @@ const AddTabForm = (props) => {
         })
         .then(res =>{
             if(res.status === 200) {
-                dispatch(addTab({id: id, title: location}));
+                dispatch(addTab({id: id, location: location}));
                 resetState();
             }
         })

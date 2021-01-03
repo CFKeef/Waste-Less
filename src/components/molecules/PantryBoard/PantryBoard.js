@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ListTab from "../../atoms/ListTab/ListTab.js";
 
-const getTabs = state => state.tabs;
+const getTabs = state => state.tabs.tabs;
 const getSelectedTab = state => state.selects.tab;
 
 const PantryBoard = (props) => {
-    const storeTabs = Object.values(useSelector(getTabs));
+    const storeTabs = (useSelector(getTabs));
     const storeSelectedTab = useSelector(getSelectedTab);
     const dispatch = useDispatch();
     return (
@@ -18,8 +18,8 @@ const PantryBoard = (props) => {
                     style={{width: "100%"}}
                     horizontal={true}
                     data={storeTabs}
-                    renderItem={({item}) => <ListTab tab={item} selected={storeSelectedTab} action={props.handleTabClick} />}
-                    keyExtractor={item => item.id}
+                    renderItem={(item) => <ListTab tab={item} selected={storeSelectedTab} action={props.handleTabClick} />}
+                    keyExtractor={(item) => item.id}
                     removeClippedSubviews={false}
                 />
                 <View style={styles.line} />

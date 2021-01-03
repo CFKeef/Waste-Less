@@ -12,6 +12,14 @@ export const editProduct = payload => {
     };
 };
 
+export const setProducts = payload => {
+    return {
+        type: 'PRODUCTS_SET',
+        payload: payload
+    };
+};
+
+
 export const filterProducts = payload => {
     return {
         type: 'PRODUCTS_FILTERED',
