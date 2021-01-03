@@ -18,7 +18,7 @@ Its built with React native and redux to assist in state management
 ![Login](https://raw.githubusercontent.com/CFKeef/Waste-Less/master/assets/images/pantryLogin.png)
 
 ### Dashboard
-![Dashboard](https://raw.githubusercontent.com/CFKeef/Waste-Less/master/assets/images/PantryDash.png
+![Dashboard](https://raw.githubusercontent.com/CFKeef/Waste-Less/master/assets/images/PantryDash.png)
 
 ### Dashboard with Add product visible
 ![Dashboard with Add product visible](https://raw.githubusercontent.com/CFKeef/Waste-Less/master/assets/images/PantryDash.png)
